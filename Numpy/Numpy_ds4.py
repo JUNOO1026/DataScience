@@ -1,32 +1,34 @@
 import numpy as np
-from sklearn.datasets import load_digits
-
-x = load_digits().data
-
-x_1 = x[0].reshape(64, 1)
-x_9 = x[9].reshape(64, 1)
-
-print(x_1.shape)
-print(x_9.shape)
-
-print((x @ x.T)[0][0])
+import matplotlib.pyplot as plt
+from sklearn.datasets import fetch_olivetti_faces
 
 
-A = np.array([[1, 2, 3], [4, 5, 6]])
-B = np.array([[1, 2], [3, 4], [5, 6]])
+faces = fetch_olivetti_faces()
 
-print(A @ B)
-print(B @ A)
+f, ax = plt.subplots(1, 3)
+
+ax[0].imshow(faces.images[6], cmap=plt.cm.bone)
+ax[0].grid(False)
+ax[0].set_xticks([])
+ax[0].set_yticks([])
+ax[0].set_title('imgae1')
+
+ax[1].imshow(faces.images[10], cmap=plt.cm.bone)
+ax[1].grid(False)
+ax[1].set_xticks([])
+ax[1].set_yticks([])
+ax[1].set_title('image2')
+
+n_faces = faces.images[6] * 0.6 + faces.images[10] * 0.4
+print(n_faces.shape)
+ax[2].imshow(n_faces, cmap=plt.cm.bone)
+ax[2].grid(False)
+ax[2].set_xticks([])
+ax[2].set_yticks([])
+ax[2].set_title('new face(image1 + image2)')
+
+plt.show()
 
 
-C = np.array([[1, 2, 3]])
-D = np.array([[4, 7], [5, 8], [6, 9]])
 
-print(C @ D)
-# print(D @ C)
 
-E = np.array([[1, 2], [3, 4]])
-F = np.array([[5, 6], [7, 8]])
-
-print(E @ F)
-print(F @ E)
